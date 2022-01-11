@@ -36,6 +36,7 @@ def get_random_comic():
     imageURL = jsonData['img']
     return imageURL
 
+# checks and creats the cache directory
 def setup_cache_dir():
     homedir = os.path.expanduser("~") # without the ending /
     cachedir = homedir+"/.cache/xkcd"
@@ -53,25 +54,25 @@ def download_image(url, cacheDir):
     urllib.request.urlretrieve(url, full_path)
 
 
+# takes the comic with shadow and sticks a background on it
 def add_background(bgcolor):
     source_path = setup_cache_dir() + "/shadowcomic.png"
     target_path = setup_cache_dir() + "/background.png"
     cmdargs = ["convert", source_path, "-gravity", "center", "-background", bgcolor, "-extent", "1920x1080", target_path]
     subprocess.run(cmdargs, capture_output=True)
 
+
+# Calculates color of shadow
 def generate_shadow_color(bgcolor):
     rawHex = bgcolor.lstrip("#")
     rgb = tuple(int(rawHex[i:i+2], 16) for i in (0, 2, 4))
-    print(rgb)
     colorList = list(rgb)
     for i in range(0, len(colorList)):
         colorList[i] = int(colorList[i]*0.8)
     rgb = tuple(colorList)
-    #  hsv = colorsys.rgb_to_hsv(*rgb)
-    #  print(hsv)
-    print(rgb)
     return(rgb)
 
+# adds the drop shadow to the comic
 def add_drop_shadow(bgcolor):
     shadow_color = list(generate_shadow_color(bgcolor))
     color_string = "rgb({},{},{})".format(shadow_color[0], shadow_color[1], shadow_color[2])
