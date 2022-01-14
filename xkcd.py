@@ -1,12 +1,10 @@
 import argparse
-import colorsys
 import json
 import requests
 import os
 import random
 import urllib.request
 import subprocess
-import colorsys
 
 
 
