@@ -101,7 +101,7 @@ def main():
     comic_source.add_argument('-c', '--comicnum', default="1", dest='comicnum', action='store', help='which comic to use')
     comic_source.add_argument('-r', '--random', default="False", dest='randomcomic', action='store_true', help='use random comic') # need to make this a boolean flag
     parser.add_argument('-b', '--bgcolor', default="#EAD494", dest='bgcolor', action='store', help='color value in hex notation')
-    parser.add_argument('-s', '--size', default="1920x1080", dest='size', action='store', help='resolution to create the wallpaper')
+    parser.add_argument('-s', '--size', default="1920x1080", dest='size', action='store', help='resolution to create the wallpaper. default 1920x1080')
     args = parser.parse_args()
 
     setup_cache_dir()
